@@ -21,7 +21,7 @@ LARGER	SPACE	4					; allocates 4 uninitialized bytes in RAM for LARGER
 		AREA    |.text|, CODE, READONLY, ALIGN=2	; code in flash ROM
 		EXPORT  Start				; export public function "start" for use elsewhere
 NUM1   	DCD   	6				; 32-bit constant data NUM1 = -1
-NUM2	DCD		92					; 32-bit constant data NUM2 = 2
+NUM2	DCD		42					; 32-bit constant data NUM2 = 2
 ;-------End of Assembler Directives----------
 
 
