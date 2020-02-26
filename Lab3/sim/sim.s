@@ -10,6 +10,7 @@
 		EXPORT  SUM	[DATA,SIZE=4]	; export public varialbe "SUM" for use elsewhere
 		EXPORT  DIFF [DATA,SIZE=4]	; export public varialbe "DIFF" for use elsewhere
 		EXPORT  ABS [DATA,SIZE=4]	; export public varialbe "ABS" for use elsewhere
+		EXPORT  LARGER [DATA,SIZE=4]	; export public varialbe "ABS" for use elsewhere
 SUM     SPACE	4   				; allocates 4 uninitialized bytes in RAM for SUM
 DIFF	SPACE	4					; allocates 4 uninitialized bytes in RAM for DIFF
 ABS		SPACE	4					; allocates 4 uninitialized bytes in RAM for ABS
@@ -19,8 +20,8 @@ LARGER	SPACE	4					; allocates 4 uninitialized bytes in RAM for LARGER
 		; Code
 		AREA    |.text|, CODE, READONLY, ALIGN=2	; code in flash ROM
 		EXPORT  Start				; export public function "start" for use elsewhere
-NUM1   	DCD   	3				; 32-bit constant data NUM1 = -1
-NUM2	DCD		1					; 32-bit constant data NUM2 = 2
+NUM1   	DCD   	6				; 32-bit constant data NUM1 = -1
+NUM2	DCD		92					; 32-bit constant data NUM2 = 2
 ;-------End of Assembler Directives----------
 
 
