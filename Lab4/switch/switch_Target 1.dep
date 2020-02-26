@@ -1,0 +1,6 @@
+Dependencies for Project 'switch', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_rvmdk.S)(0x540D5F11)()
+F (.\switch.c)(0x541F534A)()
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (..\..\..\..\inc/tm4c123gh6pm.h)(0x540D5F21)
+F (..\..\..\..\driverlib\rvmdk\driverlib.lib)(0x540D5F11)()

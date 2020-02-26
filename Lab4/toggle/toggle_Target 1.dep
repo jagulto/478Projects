@@ -1,0 +1,8 @@
+Dependencies for Project 'toggle', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_rvmdk.S)(0x540D5101)()
+F (.\toggle.c)(0x54E2F654)()
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x51C88A34)
+I (..\..\..\..\inc/tm4c123gh6pm.h)(0x54230CF6)
+I (..\..\..\..\driverlib/sysctl.h)(0x54230CED)
+F (..\..\..\..\driverlib\rvmdk\driverlib.lib)(0x54230CED)()
