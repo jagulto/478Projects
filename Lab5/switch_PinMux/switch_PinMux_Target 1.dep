@@ -1,0 +1,16 @@
+Dependencies for Project 'switch_PinMux', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
+F (.\startup_rvmdk.S)(0x540D5101)(--cpu "Cortex-M4" --pd "__EVAL SETA 1" -g --apcs /interwork --fpu=vfpv2-I.\RTE\_Target_1-IC:\Users\jagulto\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\jagulto\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list --xref -o .\startup_rvmdk.o --depend .\startup_rvmdk.d)
+F (.\switch_PinMux.c)(0x5E680484)(-c --cpu "Cortex-M4" -D__EVAL -g -O0 --apcs=/interwork -I ..\..\..\.. --c99-I.\RTE\_Target_1-IC:\Users\jagulto\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\jagulto\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="529" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM-o .\switch_pinmux.o --depend .\switch_pinmux.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x00000000)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x00000000)
+I (switch_PinMux.h)(0x541D449C)
+I (..\..\..\..\inc/hw_types.h)(0x00000000)
+I (..\..\..\..\inc/hw_memmap.h)(0x00000000)
+I (..\..\..\..\inc/hw_gpio.h)(0x00000000)
+I (..\..\..\..\driverlib/sysctl.h)(0x5E42EAAC)
+I (..\..\..\..\driverlib/pin_map.h)(0x5E42EAAB)
+I (..\..\..\..\driverlib/gpio.h)(0x5E42EAAB)
+I (..\..\..\..\inc/tm4c123gh6pm.h)(0x00000000)
+F (.\switch_PinMux.h)(0x541D449C)()
+F (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rvmdk\driverlib.lib)(0x5E42EAAC)()
