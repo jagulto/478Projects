@@ -591,10 +591,13 @@ ARM Macro Assembler    Page 10
 
               00000100 
               00000000 
-Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\sta
-rtup_rvmdk.d -o.\startup_rvmdk.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Inc
-lude -IC:\Keil\ARM\Inc\TI\TM4C123 --predefine="__EVAL SETA 1" --list=.\startup_
-rvmdk.lst startup_rvmdk.S
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\startup_rvmdk.d -o.\startup_rvmdk.o -I.\RTE\_Target_1 -IC:
+\Users\jagulto\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\
+Users\jagulto\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C12
+3 --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predef
+ine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.\startup_rvmdk.lst
+ startup_rvmdk.S
 
 
 
@@ -924,4 +927,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 2 symbols
-355 symbols in table
+358 symbols in table

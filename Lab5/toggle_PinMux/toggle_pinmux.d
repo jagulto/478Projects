@@ -1,6 +1,6 @@
 .\toggle_pinmux.o: toggle_PinMux.c
-.\toggle_pinmux.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\toggle_pinmux.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\toggle_pinmux.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\toggle_pinmux.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\toggle_pinmux.o: toggle_PinMux.h
 .\toggle_pinmux.o: ..\..\..\..\inc/hw_types.h
 .\toggle_pinmux.o: ..\..\..\..\inc/hw_memmap.h

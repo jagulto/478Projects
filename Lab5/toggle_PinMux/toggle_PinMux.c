@@ -45,7 +45,7 @@
 #include "driverlib/pin_map.h"
 #include "driverlib/gpio.h"
 
-#define 	RED_MASK 		0x02
+#define 	GREEN_MASK 		0x08
 
 //*****************************************************************************
 //
@@ -65,7 +65,7 @@ PortFunctionInit(void)
     //
     // Enable pin PF1 for GPIOOutput
     //
-    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1);
+    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3);
 }
 
 int main(void)
@@ -76,8 +76,8 @@ int main(void)
 		PortFunctionInit();
 	
     // Turn on the LED.
-    LED_data= 0x02;
-		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED_data);
+    LED_data= 0x08;
+		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED_data);
     
     //
     // Loop forever.
@@ -85,10 +85,10 @@ int main(void)
     while(1)
     {
         // Delay for a bit.
-				SysCtlDelay(2000000);	
+				SysCtlDelay(2000000 * 5);	
 
         // Toggle the LED.
-        LED_data^=RED_MASK;	//toggle red LED (PF1)
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED_data);
+        LED_data^=GREEN_MASK;	//toggle green LED (PF3)
+				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED_data);
     }
 }
