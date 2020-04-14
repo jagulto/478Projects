@@ -67,42 +67,33 @@ PortFunctionInit(void)
 		
 		MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1);
 	  MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3);
+	
+		GPIO_PORTF_PUR_R |= 0x11;
 }
 
 int main(void) {
 	PortFunctionInit();
 	
+	int half = SysCtlClockGet() / 6;
+	
 	uint8_t LED1Data = 0x08;
 	uint8_t LED2Data = 0x02;
-	
+
   while(1) {
-		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0x00) {		
-			if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x01) {
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED1Data);	
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-				
-				while (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x01) {
-					LED1Data ^= 0x08;
-					
-					SysCtlDelay(2700000);	
-					
-					GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED1Data);	
-				}					
-			} else {
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);	
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED2Data);
-				
-				while (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00) {
-					LED2Data ^= 0x02;
-					
-					SysCtlDelay(2700000);	
-					
-					GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED2Data);	
-				}								
-			} 
+		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0x00) {
+				LED1Data = 0x00;
+				LED2Data = 0x00;
+		} else if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00) {
+				LED2Data = 0x00;
+				LED1Data ^= 0x08;					
 		} else {
-			GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-			GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
+				LED2Data ^= 0x02;
+				LED1Data = 0x00;					
 		}
+		
+		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED1Data);
+		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED2Data);	
+		SysCtlDelay(half);	
 	}
 }
+
