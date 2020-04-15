@@ -69,33 +69,33 @@ PortFunctionInit(void)
 int main(void) {
 	PortFunctionInit();
 	
-	int counter = 0;
-	int db1 = 0;
-	int db2 = 0;
 	
-	uint8_t LED2Data = 0x04;
-	uint8_t LED1Data = 0x02;
+	int counter = 0;					// counter for system to detect
+	int db1 = 0;							// button debounce to debounce button PF0
+	int db2 = 0;							// button debounce to debounce button PF4
+	
+	uint8_t LED2Data = 0x04;	// instantiate LED2 data as variable
+	uint8_t LED1Data = 0x02;	// instantiate LED1 data as variable
 
   while(1) {
-		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00 && db1 == 0) {
-			counter = counter + 1;
-			db1 = 1;
-		} if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) != 0x00 && db1 == 1) db1 = 0;
-		
-		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0x00 && db2 == 0) {
-			counter = counter - 1;
+		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00 && db1 == 0) {								// if PF0 is pressed, counter will increment
+			counter = counter + 1;																													// and button debounce will change to 1
+			db1 = 1;	
+		} if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) != 0x00 && db1 == 1) db1 = 0;			// if db1 is on but button is no longer pressed
+																																											// debouncer will turn off
+		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0x00 && db2 == 0) {								// debounce is used so button wont increment if
+			counter = counter - 1;																													// button is being held
 			db2 = 1;
 		} if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) != 0x00 && db2 == 1) db2 = 0;
 		
-		if (counter > 3) counter = 3;
-		if (counter < 0) counter = 0;
+		if (counter > 3) counter = 3;																// counter caps at 3
+		if (counter < 0) counter = 0;																// counter min is 0
 		
-		if (counter == 1 || counter == 3) LED1Data = 0x02;
-		else LED1Data = 0x00;
+		if (counter == 1 || counter == 3) LED1Data = 0x02;					// RED led is only on when counter is either 1 or 3
+		else LED1Data = 0x00;																				// otherwise its off
 
-		
-		if (counter >= 2) LED2Data = 0x04;
-		else LED2Data = 0x00;
+		if (counter >= 2) LED2Data = 0x04;													// BLUE led is only on when counter is above 2
+		else LED2Data = 0x00;																				// otherwise its off
 
 		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED1Data);
 		GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, LED2Data);
