@@ -388,6 +388,11 @@
               <FilePath>.\startup_rvmdk.S</FilePath>
             </File>
             <File>
+              <FileName>driverlib.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
+            </File>
+            <File>
               <FileName>toggle_PinMux.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\toggle_PinMux.c</FilePath>
@@ -396,11 +401,6 @@
               <FileName>toggle_PinMux.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\toggle_PinMux.h</FilePath>
-            </File>
-            <File>
-              <FileName>driverlib.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
           </Files>
         </Group>

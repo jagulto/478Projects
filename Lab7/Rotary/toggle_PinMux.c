@@ -69,7 +69,6 @@ PortFunctionInit(void)
 int main(void) {
 	PortFunctionInit();
 	
-	
 	int counter = 0;					// counter for system to detect
 	int db1 = 0;							// button debounce to debounce button PF0
 	int db2 = 0;							// button debounce to debounce button PF4
@@ -77,6 +76,8 @@ int main(void) {
 	uint8_t LED2Data = 0x04;	// instantiate LED2 data as variable
 	uint8_t LED1Data = 0x02;	// instantiate LED1 data as variable
 
+	
+	
   while(1) {
 		if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00 && db1 == 0) {								// if PF0 is pressed, counter will increment
 			counter = counter + 1;																													// and button debounce will change to 1
