@@ -75,7 +75,7 @@ void GPIOPortF_Handler(void)
 {
 	//switch debounce
 	NVIC_EN0_R &= ~0x40000000; 
-	SysCtlDelay(53333);	// Delay for a while
+	//SysCtlDelay(53333);	// Delay for a while
 	NVIC_EN0_R |= 0x40000000; 
 	
 	//SW1 has action

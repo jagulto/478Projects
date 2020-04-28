@@ -71,7 +71,7 @@ void Timer0A_Handler(void)
 
 int main(void)
 {	
-		unsigned long period = 8000000; //reload value to Timer0A to generate half second delay
+		unsigned long period = SysCtlClockGet(); //reload value to Timer0A to generate half second delay
 	
 		//initialize the GPIO ports	
 		PortFunctionInit();
@@ -89,6 +89,6 @@ int main(void)
     //
     while(1)
     {
-
+			
     }
 }

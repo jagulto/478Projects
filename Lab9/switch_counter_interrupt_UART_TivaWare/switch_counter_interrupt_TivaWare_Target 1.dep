@@ -1,0 +1,19 @@
+Dependencies for Project 'switch_counter_interrupt_TivaWare', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
+F (.\startup_rvmdk.S)(0x58D779BA)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Users\jagulto\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\jagulto\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup_rvmdk.lst --xref -o .\startup_rvmdk.o --depend .\startup_rvmdk.d)
+F (..\..\..\..\driverlib\rvmdk\driverlib.lib)(0x5E42EAAC)()
+F (.\switch_counter_interrupt_TivaWare.c)(0x5EA8B2C6)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I ..\..\..\.. --c99-I.\RTE\_Target_1-IC:\Users\jagulto\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\jagulto\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="529" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM-o .\switch_counter_interrupt_tivaware.o --omf_browse .\switch_counter_interrupt_tivaware.crf --depend .\switch_counter_interrupt_tivaware.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9BB318)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9BB318)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9BB31A)
+I (switch_counter_interrupt_TivaWare.h)(0x54331F92)
+I (..\..\..\..\inc/hw_types.h)(0x5E42EAB2)
+I (..\..\..\..\inc/hw_memmap.h)(0x5E42EAB2)
+I (..\..\..\..\inc/hw_gpio.h)(0x5E42EAB2)
+I (..\..\..\..\driverlib/sysctl.h)(0x5E42EAAC)
+I (..\..\..\..\driverlib/pin_map.h)(0x5E42EAAB)
+I (..\..\..\..\driverlib/gpio.h)(0x5E42EAAB)
+I (..\..\..\..\driverlib/interrupt.h)(0x5E42EAAB)
+I (..\..\..\..\inc/tm4c123gh6pm.h)(0x5E42EAB2)
+I (..\..\..\..\driverlib/uart.h)(0x5E42EAAC)
+F (.\switch_counter_interrupt_TivaWare.h)(0x54331F92)()
