@@ -22,29 +22,37 @@ void UARTIntHandler(void)
 			char c = UARTCharGetNonBlocking(UART0_BASE);
 			
 			if (c == 'r') {
-				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_PIN_1);  // turn on red LED
+				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
+				SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else if (c == 'R') {
 				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);				// turn off red LED
+        SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else if (c == 'b') {
 				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_PIN_2);	// turn on blue LED
+        SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else if (c == 'B') {
 				UARTCharPutNonBlocking(UART0_BASE, c); //echo character 
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);				// turn off blue LED
+        SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else if (c == 'g') {
 				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GPIO_PIN_3);	// turn on green LED
+        SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else if (c == 'G') {
 				UARTCharPutNonBlocking(UART0_BASE, c); //echo character
 				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);				// turn off green LED
+        SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			} else {
 				char invalid[13] = "Invalid Input";											// if character aside from specified characters above, terminal will
 																																// print "invalid input"
 				for (int i = 0; i < 13; i++) {													// for loop to print string
 					UARTCharPutNonBlocking(UART0_BASE, invalid[i]);
 				}
+				
+				SysCtlDelay(SysCtlClockGet() / (1000 * 3)); //delay ~1 msec
 			}
     }
 }
