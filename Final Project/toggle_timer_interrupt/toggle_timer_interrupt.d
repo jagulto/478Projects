@@ -1,0 +1,16 @@
+.\toggle_timer_interrupt.o: toggle_timer_interrupt.c
+.\toggle_timer_interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\toggle_timer_interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\toggle_timer_interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\toggle_timer_interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\toggle_timer_interrupt.o: ..\..\..\..\inc/tm4c123gh6pm.h
+.\toggle_timer_interrupt.o: ..\..\..\..\inc/hw_memmap.h
+.\toggle_timer_interrupt.o: ..\..\..\..\inc/hw_types.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/sysctl.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/debug.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/fpu.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/gpio.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/pin_map.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/uart.h
+.\toggle_timer_interrupt.o: ..\..\..\..\driverlib/uartstdio.h
+.\toggle_timer_interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
