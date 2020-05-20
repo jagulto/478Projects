@@ -13,20 +13,21 @@
 #include "driverlib/uart.h"
 #include "driverlib/uartstdio.h"
 
-//*****************************************************************************
-//
-//!
-//! A very simple example that uses a general purpose timer generated periodic 
-//! interrupt to toggle the on-board LED.
-//
-//*****************************************************************************
 int seconds = 30;
 int minutes = 59;
 int hours = 12;
 
-void
-PortFunctionInit(void)
-{
+bool changeTime = false;
+bool changeMinute = false;
+bool changeHour = false;
+bool ledState = true;
+
+int newMinute = 0;
+int newHour = 0;
+
+int counter = 0;
+
+void PortFunctionInit(void) {
 		volatile uint32_t ui32Loop;   
 	
 		// Enable the clock of the GPIO port that is used for the on-board LED and switch.
@@ -53,9 +54,7 @@ PortFunctionInit(void)
 		GPIO_PORTF_PUR_R |= 0x11; 
 }
 
-void
-ConfigureUART(void)
-{
+void ConfigureUART(void) {
     //
     // Enable the GPIO Peripheral used by the UART.
     //
@@ -85,13 +84,11 @@ ConfigureUART(void)
 }
 
 //Globally enable interrupts 
-void IntGlobalEnable(void)
-{
+void IntGlobalEnable(void) {
     __asm("    cpsie   i\n");
 }
 
-void Timer0A_Init(unsigned long period)
-{   
+void Timer0A_Init(unsigned long period) {   
 	volatile uint32_t ui32Loop; 
 	
 	SYSCTL_RCGC1_R |= SYSCTL_RCGC1_TIMER0; // activate timer0
@@ -107,12 +104,14 @@ void Timer0A_Init(unsigned long period)
 }
 
 //interrupt handler for Timer0A
-void Timer0A_Handler(void)
-{
+void Timer0A_Handler(void) {
 		// acknowledge flag for Timer0A
 		TIMER0_ICR_R |= 0x00000001; 
 	
 		seconds++;
+		counter++;
+	
+		if (counter > 7) counter = 0;
 			
 		if (seconds > 59) {
 			minutes++;
@@ -126,7 +125,7 @@ void Timer0A_Handler(void)
 		
 		if (hours > 12) hours = 1;
 		
-		UARTprintf("%02d:%02d:%02d\n", hours, minutes, seconds);
+		if (!changeTime) UARTprintf("%02d:%02d:%02d\n", hours, minutes, seconds);
 }
 
 
@@ -135,51 +134,68 @@ void
 Interrupt_Init(void)
 {
   NVIC_EN0_R |= 0x40000000;  		// enable interrupt 30 in NVIC (GPIOF)
-	NVIC_PRI7_R &= 0x00500000; 		// configure GPIOF interrupt priority as 0
+	NVIC_PRI7_R &= 0x00D00000; 		// configure GPIOF interrupt priority as 0
 	GPIO_PORTF_IM_R |= 0x11;   		// arm interrupt on PF0 and PF4
 	GPIO_PORTF_IS_R &= ~0x11;     // PF0 and PF4 are edge-sensitive
-  GPIO_PORTF_IBE_R |= 0x11;   	// PF0 and PF4 both edges trigger 
-  //GPIO_PORTF_IEV_R &= ~0x11;  	// PF0 and PF4 falling edge event
+  //GPIO_PORTF_IBE_R |= 0x11;   	// PF0 and PF4 both edges trigger 
+  GPIO_PORTF_IEV_R &= ~0x11;  	// PF0 and PF4 falling edge event
 }
 
-//interrupt handler
-void GPIOPortF_Handler(void)
-{
-	//switch debounce
+void GPIOPortF_Handler(void) {
 	NVIC_EN0_R &= ~0x40000000; 
-	//for (int i = 0; i < 10000; i++) 
-	SysCtlDelay(53333);	// Delay for a while
+	SysCtlDelay(53333);
 	NVIC_EN0_R |= 0x40000000; 
 	
-	//SW1 has action
-	if(GPIO_PORTF_RIS_R&0x10)
-	{
-		// acknowledge flag for PF4
-		GPIO_PORTF_ICR_R |= 0x10; 
-		
-		//SW1 is pressed
-		if((GPIO_PORTF_DATA_R&0x10)==0x00) 
-		{
-			if (seconds > 0) seconds--;
+	if (GPIO_PORTF_RIS_R&0x11) {
+			GPIO_PORTF_ICR_R |= 0x11; 
+			
+			if((GPIO_PORTF_DATA_R&0x11)==0x00) {
+					if (!changeTime) {
+						changeTime = true;
+						newMinute = minutes;
+						
+						UARTprintf("Enter minutes: (left - set | right - increment)\n");
+						UARTprintf("%02d\n", newMinute);
+						changeMinute = true;
+					} else {
+						changeTime = false;
+						changeMinute = false;
+						changeHour = false;
+					}
+			} else if((GPIO_PORTF_DATA_R&0x10)==0x00 && (GPIO_PORTF_DATA_R&0x01)!=0x00) {
+					if (changeMinute) {
+						minutes = newMinute;
+						changeMinute = false;
+						changeHour = true;
+						
+						newHour = hours;
+						UARTprintf("Enter hours: (left - set | right - increment)\n");
+						UARTprintf("%02d\n", newHour);
+				} else if (changeHour) {
+						hours = newHour;
+						changeHour = false;
+						changeTime = false;
+				}
+			} else if((GPIO_PORTF_DATA_R&0x01)==0x00 && (GPIO_PORTF_DATA_R&0x10)!=0x00) {
+						if (changeMinute) {
+							if (newMinute < 59) newMinute++;
+							else newMinute = 0;
+							UARTprintf("%02d\n", newMinute);
+						} else if (changeHour) {
+							if (newHour < 12) newHour++;
+							else newHour = 1;
+							UARTprintf("%02d\n", newHour);
+						}
+						
+						else ledState = !ledState;
+				}
 		}
-	}
-	
-	//SW2 has action
-  if(GPIO_PORTF_RIS_R&0x01)
-	{
-		// acknowledge flag for PF0
-		GPIO_PORTF_ICR_R |= 0x01; 
-		
-		if((GPIO_PORTF_DATA_R&0x01)==0x00) 
-		{
-			seconds++;
-		}
-	}
 }
 
-int main(void)
-{	
+int main(void) {	
 		unsigned long period = SysCtlClockGet(); //reload value to Timer0A to generate half second delay
+	
+
 	
 		//initialize the GPIO ports	
 		PortFunctionInit();
@@ -192,22 +208,21 @@ int main(void)
 	
 		ConfigureUART();
 
-    //
-    // Hello!
-    //
-	
-    //
-    // Loop forever.
-    //
-    while(1)
-    {
-			if (seconds == 1 || seconds == 3 || seconds == 5 || seconds == 7) GPIO_PORTF_DATA_R |= 0x02;	
-			else GPIO_PORTF_DATA_R &= ~0x02;																	
+    while(1) {
+			if (ledState) {
+					if (counter == 1 || counter == 3 || counter == 7 || counter == 9) GPIO_PORTF_DATA_R |= 0x02;	
+					else GPIO_PORTF_DATA_R &= ~0x02;																	
 
-			if (seconds == 2 || seconds == 3 || seconds == 6 || seconds == 7) GPIO_PORTF_DATA_R |= 0x04;															
-			else GPIO_PORTF_DATA_R &= ~0x04;	
-			
-			if (seconds >= 4) GPIO_PORTF_DATA_R |= 0x08;
-			else GPIO_PORTF_DATA_R &= ~0x08;
+					if (counter == 2 || counter == 3 || counter == 6 || counter == 7) GPIO_PORTF_DATA_R |= 0x04;															
+					else GPIO_PORTF_DATA_R &= ~0x04;	
+					
+					if (counter >= 4) GPIO_PORTF_DATA_R |= 0x08;
+					else GPIO_PORTF_DATA_R &= ~0x08;
+			} else {
+					GPIO_PORTF_DATA_R &= ~0x02;		
+					GPIO_PORTF_DATA_R &= ~0x04;	
+					GPIO_PORTF_DATA_R &= ~0x08;
+					counter = 0;
+			}
     }
 }
